@@ -1,6 +1,6 @@
 # PyCrawler
 
-Pythex: a Python Regular Expression Editor
+Pythex: a Python RegExp Editor
 http://pythex.org/
 
 統一星巴克門市
