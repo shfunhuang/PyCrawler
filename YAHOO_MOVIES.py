@@ -10,8 +10,8 @@ import sys
 import numpy
 import time
 from BeautifulSoup import BeautifulSoup
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 
 f1 = open("./data/Yahoo/movie.txt", "w")
 
@@ -41,7 +41,7 @@ for m_id in range(start_id, end_id + 1):
         for p in item.findAll('p'):
             dta.append(p.find('span', {'class':'dta'}).text)
         
-        f1.write(item.find('h4').text.encode('utf-8') + ";" + item.find('h5').text + ";" + ';'.join(dta).encode('utf-8') + ";" + vote.text + ";" + vsum.text)
+        f1.write(item.find('h4').text.encode('utf-8') + ";" + item.find('h5').text.encode('utf-8') + ";" + ';'.join(dta).encode('utf-8') + ";" + vote.text.encode('utf-8') + ";" + vsum.text.encode('utf-8'))
         f1.write("\n")
             
     except BaseException, e:
