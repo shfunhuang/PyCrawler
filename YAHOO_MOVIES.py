@@ -9,6 +9,7 @@ import requests
 import sys
 import numpy
 import time
+import re
 from BeautifulSoup import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding('utf8')
