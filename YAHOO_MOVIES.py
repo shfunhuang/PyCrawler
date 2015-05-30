@@ -6,13 +6,13 @@ Created on Sat Apr 25 12:09:25 2015
 """
 
 import requests
-import sys
+#import sys
 import numpy
 import time
 import re
 from BeautifulSoup import BeautifulSoup
-reload(sys)
-sys.setdefaultencoding('utf8')
+#reload(sys)
+#sys.setdefaultencoding('utf8')
 
 f1 = open("./data/Yahoo/movie.txt", "w")
 f2 = open("./data/Yahoo/director.txt", "w")
@@ -20,7 +20,7 @@ f3 = open("./data/Yahoo/performer.txt", "w")
 
 ### 電影id區間 
 start_id = 1
-end_id = 10
+end_id = 20
 
 for m_id in range(start_id, end_id + 1):
     time.sleep(abs(numpy.random.randn()))
@@ -48,9 +48,9 @@ for m_id in range(start_id, end_id + 1):
         #f1.write(item.find('h4').text.encode('utf-8') + ";" + item.find('h5').text.encode('utf-8') + ";" + ','.join(dta).encode('utf-8') + ";" + vote.find("strong").text.encode('utf-8') + ";" + vote.find("q").text.encode('utf-8') + ";" + vsum.find("em").text.encode('utf-8') + ";" + vsum.find("q").text.encode('utf-8'))
         f1.write(str(m_id) + ";" + item.find('h4').text.encode('utf-8') + ";" + item.find('h5').text.encode('utf-8') + ";" + vote.find("strong").text.encode('utf-8') + ";" + vote.find("q").text.encode('utf-8') + ";" + vsum.find("em").text.encode('utf-8') + ";" + vsum.find("q").text.encode('utf-8'))
         f1.write("\n")
-		        
+
+        ### 導演(f2), 演員(f3)過濾中文 & 特殊符號		        
         name = []
-        ### 演員過濾中文 & 特殊符號
         for i in ",".join(dta).split(",")[3:-2]:
             for j in re.sub(r'[\x80-\xff]{3,}', '', str(i.encode('utf-8'))).split(")("):
                 name.append(re.sub('\(|\)', '', j))
