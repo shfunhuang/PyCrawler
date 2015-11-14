@@ -5,15 +5,13 @@ Created on Sat Nov 14 12:11:00 2015
 @author: Shfun Huang
 """
 
+
 import requests
-#import sys
 import numpy
 import time
 import re
 from bs4 import BeautifulSoup
 import contextlib
-#reload(sys)
-#sys.setdefaultencoding('utf8')
 
 
 
@@ -21,6 +19,7 @@ import contextlib
 miss = 0
 start_id = 1
 end_id = 10
+tStart = time.time()
 
 with contextlib.nested(open('data/Yahoo/miss.txt', 'w'), 
                        open('data/Yahoo/movie.txt', 'w'),
@@ -151,9 +150,5 @@ with contextlib.nested(open('data/Yahoo/miss.txt', 'w'),
         except BaseException, e:
             print e
             
-print miss
-
-
-
-
-
+print "missing: " + str(miss)
+print "duration: " + time.strftime("%H:%M:%S", time.gmtime(time.time() - tStart))
