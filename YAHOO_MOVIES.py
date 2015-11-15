@@ -18,7 +18,7 @@ import contextlib
 ### 電影id區間 
 miss = 0
 start_id = 1
-end_id = 10
+end_id = 6044
 tStart = time.time()
 
 with contextlib.nested(open('data/Yahoo/miss.txt', 'w'), 
@@ -80,9 +80,9 @@ with contextlib.nested(open('data/Yahoo/miss.txt', 'w'),
         
             director1 = []
             for dta22 in dta2[3].findAll('a'):
-                director1.append(re.sub('(\w+)|\(|\)|\.', '', dta22['href'].replace('/artist_filmography.html?name=','')).strip())
+                director1.append(re.sub('(\w+)|\(|\)|\.|\-', '', dta22['href'].replace('/artist_filmography.html?name=','').strip()))
             
-            #print ''.join(director1) #中文導演名稱
+            #print ','.join(director1) #中文導演名稱
     
             dta21 = []
             for p in item.findAll('p'):
@@ -96,7 +96,7 @@ with contextlib.nested(open('data/Yahoo/miss.txt', 'w'),
     
             #print director2[0] #英文導演名稱
             
-            f2.write(str(m_id) + ";" + ''.join(director1).encode('utf-8') + ";" + director2[0])
+            f2.write(str(m_id) + ";" + ','.join(director1).encode('utf-8') + ";" + director2[0])
             f2.write("\n")
             
             ### f3 ###
@@ -106,7 +106,7 @@ with contextlib.nested(open('data/Yahoo/miss.txt', 'w'),
 
             performer1 = []
             for dta3 in dta2[4].findAll('a'):
-                performer1.append(dta3['href'].replace('/artist_filmography.html?name=','').replace('\r\n',''))
+                performer1.append(re.sub('(\w+)|\(|\)|\.', '', dta3['href'].replace('/artist_filmography.html?name=','').replace('\r\n','')))
 
             #print ','.join(performer1) #中文演員名稱
     
@@ -149,6 +149,7 @@ with contextlib.nested(open('data/Yahoo/miss.txt', 'w'),
             
         except BaseException, e:
             print e
-            
+
 print "missing: " + str(miss)
 print "duration: " + time.strftime("%H:%M:%S", time.gmtime(time.time() - tStart))
+
